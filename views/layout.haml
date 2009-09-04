@@ -1,0 +1,22 @@
+!!!loose
+%html{:xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %title Readme This : Testing github's README formats
+    %link{:href => '/stylesheets/master.css', :rel => 'stylesheet', :type => 'text/css'}
+  %body
+    #main
+      #header
+        .wrapper
+          .logo
+            %span.blue Readme
+            %span.orange This
+          .slogan Test your github README format without committing.
+      #content.wrapper
+        =yield
+      #push
+    #footer
+      .wrapper
+        .info
+          Created by <a href="http://twitter.com/RichGuk">@RichGuk</a>.
+          %br
+          Design is copied from <a href="http://github.com/">Github</a>. The code can be found on my <a href="http://github.com/RichGuk/readme-this">github account</a> and is released under the MIT licence.

@@ -1,0 +1,131 @@
+/* ----------------------------------------------
+Resets default browser CSS.
+from: http://meyerweb.com/eric/tools/css/reset/
+------------------------------------------------- */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+/* remember to define focus styles! */
+:focus {
+	outline: 0;
+}
+
+/* remember to highlight inserts somehow! */
+ins {
+	text-decoration: none;
+}
+del {
+	text-decoration: line-through;
+}
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* ----------------------------------------------
+Layout CSS
+------------------------------------------------- */
+html, body {
+  height:100%;
+}
+
+body {
+  font-family:helvetica,arial,freesans,clean,sans-serif;
+  font-size:85%;
+  font-size-adjust:none;
+  font-style:normal;
+  font-variant:normal;
+  font-weight:normal;
+  line-height:normal;
+  text-align:center;
+}
+
+a {
+  color:#4183C4;
+  text-decoration:none;
+}
+
+.wrapper {
+  margin:0 auto;
+  width:69em;
+  padding:0 3em;
+  text-align: left;
+}
+
+#main {
+  height:auto !important;
+  margin:0 auto -8.6em;
+  min-height:100%;
+}
+
+#header {
+  background: #CCC url(../images/header_repeat.png) repeat-x scroll top left;
+  height: 123px;
+}
+
+.logo {
+  padding: 1em 0 0 0;
+  font-weight: bold;
+  font-size: 200%;
+}
+.slogan {
+  font-family: verdana,helvetica,arial,freesans,clean,sans-serif;
+  font-size: 80%;
+  font-style: italic;
+}
+.blue {color: blue;}
+.orange {color: orange;}
+
+#content {
+  padding: 2em 0 0 0;
+}
+
+#push {
+  height:8.6em;
+  padding-bottom:4em;
+}
+
+#footer {
+  background:#BBCCD9 url(../images/footer_repeat.png) repeat-x scroll top left;
+  height:8.6em; min-width:75em;
+  overflow:hidden;
+  color:#CADCEA;
+}
+#footer a {
+  color:white;
+  text-decoration:underline;
+}
+#footer .info {
+  padding-top: 2em;
+}
