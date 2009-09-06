@@ -1,0 +1,16 @@
+h1. Header 1
+
+Some normal text.
+
+"github.com":http://github.com
+
+h2. Header 2
+
+h3. Header 3
+
+Some normal text with *bold* and _emphasised_ text.
+
+Now some code:
+<pre>
+  gem install sinatra
+</pre>
