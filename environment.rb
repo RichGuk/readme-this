@@ -5,6 +5,11 @@ require 'dm-validations'
 require 'dm-aggregates'
 require 'haml'
 
+require 'rdoc/markup'
+require 'rdoc/markup/to_html'
+require 'redcloth'
+require 'rdiscount'
+
 require 'sinatra' unless defined?(Sinatra)
 
 # Database setup.

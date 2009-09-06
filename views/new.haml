@@ -1,0 +1,25 @@
+.box{:style => 'margin-bottom:1em'}
+  %h2 What is it?
+  %p Have you ever written a README file on Github in RDoc, Textile, etc... and wanted to test how it looked without having to commit several times? Yeah? Well so have I, thus this was born and now I can test before I commit.
+
+.box
+  - if @fail
+    %h2{:style => 'color: red'} Something went wrong =(
+    %p Unsupported or missing README content.
+    
+  %form{:action => '/readme', :method => 'post', :enctype => 'multipart/form-data'}
+    %p
+      %label{:for => 'uploaded_readme'} Choose a file...
+      %input{:type => 'file', :name => 'uploaded_readme', :id => 'uploaded_readme'}
+    %p
+      %label ...or paste the README:
+      %select{:name => 'readme[format]', :style => 'float:right'}
+        - [['rdoc', 'rdoc'], ['Markdown', 'markdown'], ['Textile', 'textile']].each do |item|
+          %option{:value => item[1]}= item[0]
+      %div{:style => 'clear:both'}
+      %textarea{:name => 'readme[contents]', :style => 'height:20em; width: 100%', :rows => 10, :cols => 60}
+    %p
+      %input{:type => 'checkbox', :name => 'readme_private', :id => 'readme_private', :value => 1}
+      %label{:style => 'display: inline;', :for => 'readme_private'} Make it private?
+    %p
+      %input{:type => 'submit', :name => 'submit', :value => 'Show me'}
