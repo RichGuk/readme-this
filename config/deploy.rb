@@ -1,27 +1,32 @@
-set :application, "set your application name here"
-set :repository,  "set your repository location here"
-# If you aren't deploying to /u/apps/#{application} on the target
-# servers (which is the default), you can specify the actual location
-# via the :deploy_to variable:
-# set :deploy_to, "/var/www/#{application}"
+set :application, "readme-this"
+set :repository,  "git://github.com/RichGuk/readme-this.git"
 
-# set :scm, :git
-# set :git_shallow_clone, 1
-# set :git_enable_submodules, 1
-# set :deploy_via, :remote_cache
-# set :branch, 'master'
-# set :repository_cache, "#{application}-src"
-# set :key_relesaes, 3
-# set :use_sudo, false
+set :deploy_to, "~/public_html/#{application}"
+
+set :scm, :git
+set :git_shallow_clone, 1
+set :git_enable_submodules, 1
+set :deploy_via, :remote_cache
+set :branch, 'master'
+set :repository_cache, "#{application}-src"
+set :key_relesaes, 3
+set :use_sudo, false
 # set :ssh_options, :forward_agent => true
 
-role :app, "your app-server here"
-role :web, "your web-server here"
-role :db,  "your db-server here", :primary => true
+role :app, "readme-this.27smiles.com"
+role :web, "readme-this.27smiles.com"
+role :db,  "readme-this.27smiles.com", :primary => true
+
+after "deploy:finalize_update", "deploy:rackup"
 
 namespace :deploy do
   desc "restart passenger app"
   task :restart do
     run "touch #{current_path}/tmp/restart.txt"
+  end
+
+  desc "Copy config.ru from shared path to current path (for example config.ru with DATABASE_URL information)"
+  task :rackup do
+    run "cp #{shared_path}/config.ru #{current_path}/config.ru"
   end
 end
