@@ -20,6 +20,7 @@ role :web, "readme-this.27smiles.com"
 role :db,  "readme-this.27smiles.com", :primary => true
 
 after "deploy:finalize_update", "deploy:rackup"
+after "deploy:symlink", "deploy:symlinklog"
 
 namespace :deploy do
   desc "restart passenger app"
@@ -30,5 +31,11 @@ namespace :deploy do
   desc "Copy config.ru from shared path to current path (for example config.ru with DATABASE_URL information)"
   task :rackup do
     run "cp #{shared_path}/config.ru #{current_path}/config.ru"
+  end
+  
+  desc 'symlink log directory'
+  task :symlinklog do
+    run "rm -r #{current_path}/log"
+    run "ln -s #{shared_path}/log #{current_path}/log"
   end
 end
