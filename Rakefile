@@ -2,6 +2,12 @@ require 'rubygems'
 require 'rake'
 require 'spec/rake/spectask'
 
+begin
+  require 'vlad'
+  Vlad.load(:scm => :git, :web => nil, :type => nil)
+rescue LoadError
+end
+
 task :default => :spec
 task :test => :spec
 

@@ -1,41 +1,37 @@
-set :application, "readme-this"
-set :repository,  "git://github.com/RichGuk/readme-this.git"
-
-set :deploy_to, "~/apps/#{application}"
-
-set :scm, :git
-set :git_shallow_clone, 1
-set :git_enable_submodules, 1
-set :deploy_via, :remote_cache
-set :branch, 'master'
-set :repository_cache, "#{application}-src"
-set :key_relesaes, 3
-set :use_sudo, false
-# set :ssh_options, :forward_agent => true
+set :application, 'readme-this'
 
 set :user, 'rich'
+set :ssh_flags, '-A'
 
-role :app, "readme-this.27smiles.com"
-role :web, "readme-this.27smiles.com"
-role :db,  "readme-this.27smiles.com", :primary => true
+set :repository, 'git://github.com/RichGuk/readme-this.git'
 
-after "deploy:finalize_update", "deploy:rackup"
-after "deploy:symlink", "deploy:symlinklog"
+set :domain, "#{user}@carina.27smiles.com"
+set :deploy_to, "/home/rich/apps/#{application}"
 
-namespace :deploy do
-  desc "restart passenger app"
-  task :restart do
-    run "touch #{current_path}/tmp/restart.txt"
+set :perm_owner, 'rich'
+set :perm_group, 'nginx'
+set :umask, '027'
+set :shared_paths, { 'log' => 'log' }
+
+set :rvm_path, '$HOME/.rvm'
+
+namespace :vlad do
+  desc 'Install gem from Gemfile'
+  remote_task :bundle do
+
+    rvm_setup = "source #{rvm_path}/scripts/rvm && rvm rvmrc trust #{current_path}"
+    bundle_update = "bundle install --without test development"
+    run "#{rvm_setup} && cd #{current_path} && #{bundle_update}"
   end
 
-  desc "Copy config.ru from shared path to current path (for example config.ru with DATABASE_URL information)"
-  task :rackup do
-    run "cp #{shared_path}/config.ru #{current_path}/config.ru"
+  task :update do
+    Rake::Task['vlad:bundle'].invoke
   end
-  
-  desc 'symlink log directory'
-  task :symlinklog do
-    run "rm -r #{current_path}/log"
-    run "ln -s #{shared_path}/log #{current_path}/log"
+
+  remote_task :update_symlinks, :roles => :app do
+    run "rm #{release_path}/config.ru && ln -s #{shared_path}/config.ru #{release_path}/config.ru"
   end
+
+  desc 'Deploy the latest application and restart the server'
+  task :deploy => [:update, :start_app]
 end
