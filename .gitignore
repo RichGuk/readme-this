@@ -1,5 +1,6 @@
 .DS_Store
 *.swp
 *.db
+.bundle
 log/*
 tmp/*

@@ -1,10 +1,10 @@
 class Readme
   include DataMapper::Resource
 
-  property :id, Integer, :serial => true
+  property :id, Serial, :serial => true
   property :private_id, String, :index => true
-  property :format, String, :nullable => false
-  property :contents, Text, :nullable => false
+  property :format, String, :required => true
+  property :contents, Text, :required => true
 
   property :created_at, DateTime
   property :updated_at, DateTime

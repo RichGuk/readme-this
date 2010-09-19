@@ -1,5 +1,10 @@
 require 'rubygems'
+require 'bundler'
+Bundler.setup
+
 require 'sinatra'
+Bundler.require(:default, (ENV['RACK_ENV'] || :deveopment))
+
 require 'environment'
 
 # not_found do
