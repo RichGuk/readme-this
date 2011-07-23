@@ -1,4 +1,4 @@
-source :rubygems
+source 'http://rubygems.org'
 
 gem 'sinatra'
 gem 'haml'
@@ -8,6 +8,14 @@ gem 'dm-timestamps'
 gem 'dm-validations'
 gem 'dm-aggregates'
 
+gem 'github-markup', :require => 'github/markup'
+gem 'redcarpet'
+gem 'RedCloth'
+gem 'rdoc', '3.6.1'
+gem 'org-ruby'
+gem 'creole'
+gem 'wikicloth'
+
 group :production do
   gem 'dm-mysql-adapter'
 end
@@ -15,9 +23,3 @@ end
 group :development do
   gem 'dm-sqlite-adapter'
 end
-
-#gem 'rdoc/markup'
-#gem 'rdoc/markup/to_html'
-gem 'rdoc', :require => ['rdoc/markup', 'rdoc/markup/to_html']
-gem 'RedCloth'
-gem 'rdiscount'
