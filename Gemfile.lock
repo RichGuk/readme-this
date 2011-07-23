@@ -1,8 +1,10 @@
 GEM
   remote: http://rubygems.org/
   specs:
-    RedCloth (4.2.3)
+    RedCloth (4.2.7)
     addressable (2.2.1)
+    builder (3.0.0)
+    creole (0.4.2)
     data_objects (0.10.2)
       addressable (~> 2.1)
     dm-aggregates (1.0.2)
@@ -27,26 +29,38 @@ GEM
       data_objects (= 0.10.2)
     do_sqlite3 (0.10.2)
       data_objects (= 0.10.2)
+    expression_parser (0.9.0)
     extlib (0.9.15)
+    github-markup (0.5.3)
     haml (3.0.18)
+    org-ruby (0.5.3)
+      rubypants (>= 0.2.0)
     rack (1.2.1)
-    rdiscount (1.6.5)
-    rdoc (2.5.11)
+    rdoc (3.6.1)
+    redcarpet (1.17.2)
+    rubypants (0.2.0)
     sinatra (1.0)
       rack (>= 1.0)
+    wikicloth (0.7.0)
+      builder
+      expression_parser
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   RedCloth
+  creole
   dm-aggregates
   dm-core
   dm-mysql-adapter
   dm-sqlite-adapter
   dm-timestamps
   dm-validations
+  github-markup
   haml
-  rdiscount
-  rdoc
+  org-ruby
+  rdoc (= 3.6.1)
+  redcarpet
   sinatra
+  wikicloth

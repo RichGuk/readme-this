@@ -14,7 +14,7 @@
     %p
       %label ...or paste the README:
       %select{:name => 'readme[format]', :style => 'float:right'}
-        - [['rdoc', 'rdoc'], ['Markdown', 'markdown'], ['Textile', 'textile']].each do |item|
+        - [['rdoc', 'rdoc'], ['Markdown', 'markdown'], ['Textile', 'textile'], ['reStructuredText', 'rst'], ['AsciiDoc', 'asciidoc']].each do |item|
           %option{:value => item[1]}= item[0]
       %div{:style => 'clear:both'}
       %textarea{:name => 'readme[contents]', :style => 'height:20em; width: 100%', :rows => 10, :cols => 60}

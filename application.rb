@@ -1,10 +1,10 @@
 require 'rubygems'
 require 'bundler'
-Bundler.setup
+require 'bundler/setup'
 
 require 'sinatra'
+Bundler.setup(:default, (ENV['RACK_ENV'] || :deveopment))
 Bundler.require(:default, (ENV['RACK_ENV'] || :deveopment))
-
 require 'environment'
 
 # not_found do
@@ -26,10 +26,12 @@ end
 post '/readme' do
 
   @readme = Readme.new(params[:readme])
+  puts params[:format]
+  puts params[:uploaded_readme]
   # Uploaded document takes priority over the pasted one.
   if file = params[:uploaded_readme]
     ext = File.extname(file[:filename]).gsub('.', '').downcase
-    if %w(rdoc textile markdown md mkd mkdn).include?(ext)
+    if %w(rdoc textile markdown md mkd mkdn rst asscidoc).include?(ext)
       @readme.format = ext
       while(line = file[:tempfile].gets)
         puts line
@@ -54,16 +56,10 @@ get '/:id' do
   # If private check ID matches.
   raise Sinatra::NotFound if !@readme.private_id.nil? && @readme.private_id != params[:id]
 
-  case @readme.format
-  when 'rdoc':
-    rdoc = RDoc::Markup::ToHtml.new
-    @contents = rdoc.convert(@readme.contents)
-  when 'textile':
-    @contents = RedCloth.new(@readme.contents).to_html
-  when 'markdown', 'md', 'mkd', 'mkdn':
-    @contents = RDiscount.new(@readme.contents).to_html
-  else
-    raise Sinatra::NotFound
+  begin
+  @contents = GitHub::Markup.render("README.#{@readme.format}", @readme.contents)
+  rescue
+    raise Sintra::NotFound
   end
 
   @contents = @contents.gsub(/(<pre[^>]*>)\n+[^\w]*/, '\1')
