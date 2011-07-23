@@ -13,7 +13,7 @@ set :perm_group, 'nginx'
 set :umask, '027'
 set :shared_paths, { 'log' => 'log' }
 
-set :rvm_path, '$HOME/.rvm'
+set :rvm_path, '/usr/local/rvm'
 
 namespace :vlad do
   desc 'Install gem from Gemfile'
